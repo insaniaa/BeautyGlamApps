@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BeautyGlam</string>
+    <string name="welcome_message">Welcome to BeautyGlam!</string>
 </resources>
