@@ -27,26 +27,26 @@ fun InputScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Masukkan Data Anda", style = MaterialTheme.typography.headlineMedium)
+        Text(text = "Check your makeup for today!", style = MaterialTheme.typography.headlineMedium)
 
         // Input Nama
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Nama") }
+            label = { Text("Name") }
         )
 
         // Dropdown Pilihan
-        DropdownMenuField("Tipe Kulit", skinTypes, selectedSkinType) { selectedSkinType = it }
-        DropdownMenuField("Warna Kulit", skinTones, selectedSkinTone) { selectedSkinTone = it }
+        DropdownMenuField("Skin Type", skinTypes, selectedSkinType) { selectedSkinType = it }
+        DropdownMenuField("Skin Tone", skinTones, selectedSkinTone) { selectedSkinTone = it }
         DropdownMenuField("Undertone", undertones, selectedUndertone) { selectedUndertone = it }
-        DropdownMenuField("Jenis Visual", visualTypes, selectedVisualType) { selectedVisualType = it }
+        DropdownMenuField("Visual Type", visualTypes, selectedVisualType) { selectedVisualType = it }
 
         // Tombol Submit (Nanti bisa navigasi ke halaman hasil)
         Button(onClick = {
             // TODO: Arahkan ke halaman hasil dengan data yang dipilih
         }) {
-            Text(text = "Cari Rekomendasi Makeup")
+            Text(text = "Check  Here!")
         }
     }
 }
@@ -59,7 +59,7 @@ fun DropdownMenuField(label: String, options: List<String>, selectedOption: Stri
         Text(text = label, style = MaterialTheme.typography.bodyLarge)
         Box {
             OutlinedButton(onClick = { expanded = true }) {
-                Text(text = if (selectedOption.isEmpty()) "Pilih $label" else selectedOption)
+                Text(text = if (selectedOption.isEmpty()) "Choose $label" else selectedOption)
             }
             DropdownMenu(
                 expanded = expanded,
