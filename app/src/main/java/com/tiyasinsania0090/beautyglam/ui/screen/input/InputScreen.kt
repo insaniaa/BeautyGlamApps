@@ -52,6 +52,7 @@ fun InputScreen(
         // Tombol Submit
         Button(
             onClick = {
+                println("Navigating with: $name, $selectedSkinType, $selectedSkinTone, $selectedUndertone, $selectedVisualType")
                 onSubmit(name, selectedSkinType, selectedSkinTone, selectedUndertone, selectedVisualType)
             },
             enabled = name.isNotBlank() && selectedSkinType.isNotBlank() &&
@@ -59,6 +60,8 @@ fun InputScreen(
         ) {
             Text(text = "Check Here!")
         }
+
+
     }
 }
 

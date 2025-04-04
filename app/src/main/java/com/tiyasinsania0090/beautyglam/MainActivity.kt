@@ -1,5 +1,6 @@
 package com.tiyasinsania0090.beautyglam
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,9 +10,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.tiyasinsania0090.beautyglam.ui.theme.BeautyGlamTheme
 import com.tiyasinsania0090.beautyglam.ui.screen.input.InputScreen
+import com.tiyasinsania0090.beautyglam.ui.screen.result.ResultScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +34,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    var userData by remember { mutableStateOf("") }
+    val navController = rememberNavController()
 
     Scaffold(
         topBar = {
@@ -40,36 +47,54 @@ fun MainScreen() {
             )
         }
     ) { innerPadding ->
-        InputScreen(modifier = Modifier.padding(innerPadding)) { name, skinType, skinTone, undertone, visualType ->
-            generateMakeupRecommendation(name, skinType, skinTone, undertone, visualType) { result ->
-                userData = result
+        NavHost(navController = navController, startDestination = "input") {
+            composable("input") {
+                InputScreen(
+                    modifier = Modifier.padding(innerPadding)
+                ) { name, skinType, skinTone, undertone, visualType ->
+                    navigateToResult(navController, name, skinType, skinTone, undertone, visualType)
+                }
             }
-        }
-
-        // Jika ingin menampilkan hasil di UI:
-        if (userData.isNotEmpty()) {
-            Text(text = userData, modifier = Modifier.padding(16.dp))
+            composable(
+                route = "result/{name}/{skinType}/{skinTone}/{undertone}/{visualType}",
+                arguments = listOf(
+                    navArgument("name") { type = NavType.StringType },
+                    navArgument("skinType") { type = NavType.StringType },
+                    navArgument("skinTone") { type = NavType.StringType },
+                    navArgument("undertone") { type = NavType.StringType },
+                    navArgument("visualType") { type = NavType.StringType }
+                )
+            ) { backStackEntry ->
+                ResultScreen(
+                    name = backStackEntry.arguments?.getString("name") ?: "",
+                    skinType = backStackEntry.arguments?.getString("skinType") ?: "",
+                    skinTone = backStackEntry.arguments?.getString("skinTone") ?: "",
+                    undertone = backStackEntry.arguments?.getString("undertone") ?: "",
+                    visualType = backStackEntry.arguments?.getString("visualType") ?: ""
+                )
+            }
         }
     }
 }
 
-fun generateMakeupRecommendation(
+/** ✅ Fungsi Navigasi yang Lebih Aman */
+fun navigateToResult(
+    navController: NavController,
     name: String,
     skinType: String,
     skinTone: String,
     undertone: String,
-    visualType: String,
-    onResult: (String) -> Unit
+    visualType: String
 ) {
-    val result = """
-        User: $name
-        Skin Type: $skinType
-        Skin Tone: $skinTone
-        Undertone: $undertone
-        Visual Type: $visualType
-    """.trimIndent()
+    println("Navigating to ResultScreen with: $name, $skinType, $skinTone, $undertone, $visualType")
 
-    onResult(result) // Mengupdate state di MainScreen()
+    val encodedName = Uri.encode(name)
+    val encodedSkinType = Uri.encode(skinType)
+    val encodedSkinTone = Uri.encode(skinTone)
+    val encodedUndertone = Uri.encode(undertone)
+    val encodedVisualType = Uri.encode(visualType)
+
+    navController.navigate("result/$encodedName/$encodedSkinType/$encodedSkinTone/$encodedUndertone/$encodedVisualType")
 }
 
 @Preview(showBackground = true)

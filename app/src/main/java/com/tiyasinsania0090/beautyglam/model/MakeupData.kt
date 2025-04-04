@@ -1,5 +1,4 @@
 package com.tiyasinsania0090.beautyglam.model
-import com.tiyasinsania0090.beautyglam.model.MakeupStyle
 
 val makeupStyles = listOf(
     MakeupStyle(
