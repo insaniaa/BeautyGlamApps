@@ -1,14 +1,19 @@
 package com.tiyasinsania0090.beautyglam.ui.screen.input
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun InputScreen(modifier: Modifier = Modifier) {
+fun InputScreen(
+    modifier: Modifier = Modifier,
+    onSubmit: (String, String, String, String, String) -> Unit
+) {
     var name by remember { mutableStateOf("") }
     var selectedSkinType by remember { mutableStateOf("") }
     var selectedSkinTone by remember { mutableStateOf("") }
@@ -18,7 +23,7 @@ fun InputScreen(modifier: Modifier = Modifier) {
     val skinTypes = listOf("Oily", "Dry", "Combination", "Normal")
     val skinTones = listOf("Fair", "Medium", "Dark")
     val undertones = listOf("Warm", "Neutral", "Cool")
-    val visualTypes = listOf("Low", "High")
+    val visualTypes = listOf("Low", "Medium", "High")
 
     Column(
         modifier = modifier
@@ -33,33 +38,43 @@ fun InputScreen(modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Name") }
+            label = { Text("Name") },
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words),
+            modifier = Modifier.fillMaxWidth()
         )
 
         // Dropdown Pilihan
-        DropdownMenuField("Skin Type", skinTypes, selectedSkinType) { selectedSkinType = it }
-        DropdownMenuField("Skin Tone", skinTones, selectedSkinTone) { selectedSkinTone = it }
-        DropdownMenuField("Undertone", undertones, selectedUndertone) { selectedUndertone = it }
-        DropdownMenuField("Visual Type", visualTypes, selectedVisualType) { selectedVisualType = it }
+        selectedSkinType = dropdownmenufield("Skin Type", skinTypes, selectedSkinType)
+        selectedSkinTone = dropdownmenufield("Skin Tone", skinTones, selectedSkinTone)
+        selectedUndertone = dropdownmenufield("Undertone", undertones, selectedUndertone)
+        selectedVisualType = dropdownmenufield("Visual Type", visualTypes, selectedVisualType)
 
-        // Tombol Submit (Nanti bisa navigasi ke halaman hasil)
-        Button(onClick = {
-            // TODO: Arahkan ke halaman hasil dengan data yang dipilih
-        }) {
-            Text(text = "Check  Here!")
+        // Tombol Submit
+        Button(
+            onClick = {
+                onSubmit(name, selectedSkinType, selectedSkinTone, selectedUndertone, selectedVisualType)
+            },
+            enabled = name.isNotBlank() && selectedSkinType.isNotBlank() &&
+                    selectedSkinTone.isNotBlank() && selectedUndertone.isNotBlank() && selectedVisualType.isNotBlank()
+        ) {
+            Text(text = "Check Here!")
         }
     }
 }
 
 @Composable
-fun DropdownMenuField(label: String, options: List<String>, selectedOption: String, onSelectionChange: (String) -> Unit) {
+fun dropdownmenufield(label: String, options: List<String>, selectedOption: String): String {
     var expanded by remember { mutableStateOf(false) }
+    var selected by remember { mutableStateOf(selectedOption) }
 
-    Column {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Text(text = label, style = MaterialTheme.typography.bodyLarge)
         Box {
-            OutlinedButton(onClick = { expanded = true }) {
-                Text(text = if (selectedOption.isEmpty()) "Choose $label" else selectedOption)
+            OutlinedButton(
+                onClick = { expanded = true },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = selected.ifEmpty { "Choose $label" })
             }
             DropdownMenu(
                 expanded = expanded,
@@ -69,7 +84,7 @@ fun DropdownMenuField(label: String, options: List<String>, selectedOption: Stri
                     DropdownMenuItem(
                         text = { Text(option) },
                         onClick = {
-                            onSelectionChange(option)
+                            selected = option // Memperbarui nilai dropdown
                             expanded = false
                         }
                     )
@@ -77,4 +92,5 @@ fun DropdownMenuField(label: String, options: List<String>, selectedOption: Stri
             }
         }
     }
+    return selected // Mengembalikan nilai yang dipilih
 }
