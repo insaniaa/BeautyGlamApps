@@ -1,9 +1,10 @@
 package com.tiyasinsania0090.beautyglam.model
 
 data class MakeupStyle(
-    val skinType: String,
-    val skinTone: String,
-    val undertone: String,
-    val visualType: String,
-    val styleName: String
+    val name: String,
+    val suitableSkinTypes: List<String>,
+    val suitableSkinTones: List<String>,
+    val suitableUndertones: List<String>,
+    val suitableVisualTypes: List<String>
 )
+
