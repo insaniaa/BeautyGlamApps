@@ -2,4 +2,21 @@
 <resources>
     <string name="app_name">BeautyGlam</string>
     <string name="welcome_message">Selamat datang di BeautyGlam!</string>
+    <string name="input_invalid">Input tidak boleh kosong</string>
+    <string name="about_apps"><![CDATA[
+GlitterMatch adalah aplikasi rekomendasi makeup yang dirancang untuk membantu pengguna menemukan gaya makeup yang paling sesuai dengan tipe kulit, warna kulit, undertone, dan jenis visual mereka. Dengan menggunakan GlitterMatch, pengguna dapat memperoleh saran makeup yang dipersonalisasi, lengkap dengan penjelasan detail dan referensi gambar, sehingga lebih mudah dalam menentukan look yang diinginkan.
+
+Sebelum mendapatkan rekomendasi, pengguna juga dapat mencoba filter makeup bold atau natural untuk mengetahui apakah tipe visual mereka lebih condong ke high visual atau low visual.
+
+🛠️ Fitur Utama:
+✔ Personalisasi Makeup: Rekomendasi makeup berdasarkan karakteristik wajah pengguna.
+✔ Penjelasan Detail: Setiap rekomendasi dilengkapi dengan informasi lengkap mengenai teknik dan produk makeup yang digunakan.
+✔ Inspirasi Visual: Tersedia referensi gambar untuk membantu pengguna memahami look yang direkomendasikan.
+✔ Interaksi yang Mudah: Input dilakukan dengan pilihan yang disesuaikan untuk pengalaman pengguna yang lebih praktis.
+
+📌 Mini Project Pemrograman Perangkat Bergerak:
+Aplikasi ini dikembangkan sebagai mini project semester pertama dalam mata kuliah Pemrograman Perangkat Bergerak. Proyek ini bertujuan untuk mengaplikasikan Jetpack Compose dalam pengembangan antarmuka Android, serta memahami cara mengelola data dan menampilkan rekomendasi yang dinamis.
+
+Dengan adanya GlitterMatch, diharapkan pengguna dapat lebih mudah mengeksplorasi berbagai gaya makeup yang sesuai dengan karakteristik wajah mereka! ✨💄
+    ]]></string>
 </resources>
