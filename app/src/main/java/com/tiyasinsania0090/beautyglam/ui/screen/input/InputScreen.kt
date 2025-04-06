@@ -6,6 +6,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,7 +17,10 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InputScreen(onSubmit: (String, String, String, String, String) -> Unit) {
+fun InputScreen(
+    onSubmit: (String, String, String, String, String) -> Unit,
+    onNavigateAbout: () -> Unit // tambahan ini
+) {
     val context = LocalContext.current
 
     var name by remember { mutableStateOf("") }
@@ -34,7 +38,16 @@ fun InputScreen(onSubmit: (String, String, String, String, String) -> Unit) {
         topBar = {
             TopAppBar(
                 title = { Text("Beauty Glam", color = Color(0xFF8E24AA)) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFFCE4EC))
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFFCE4EC)),
+                actions = {
+                    IconButton(onClick = onNavigateAbout) {
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = "About", //ini harusnya ada isinya AboutScreen :(
+                            tint = Color(0xFF8E24AA)
+                        )
+                    }
+                }
             )
         }
     ) { padding ->

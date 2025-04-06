@@ -4,44 +4,51 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.*
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.*
 import com.tiyasinsania0090.beautyglam.model.getRecommendedMakeup
-import com.tiyasinsania0090.beautyglam.model.MakeupStyle
+import com.tiyasinsania0090.beautyglam.ui.screen.about.AboutScreen
 import com.tiyasinsania0090.beautyglam.ui.screen.input.InputScreen
 import com.tiyasinsania0090.beautyglam.ui.screen.result.ResultScreen
-import com.tiyasinsania0090.beautyglam.ui.theme.BeautyGlamTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BeautyGlamTheme {
-                MainScreen()
-            }
+            BeautyGlamApp()
         }
     }
 }
 
 @Composable
-fun MainScreen() {
-    var results by remember { mutableStateOf<List<MakeupStyle>?>(null) }
+fun BeautyGlamApp() {
+    val navController = rememberNavController()
 
-    if (results == null) {
-        InputScreen { _, skinType, skinTone, undertone, visualType ->
-            results = getRecommendedMakeup(skinType, skinTone, undertone, visualType)
-        }
-    } else {
-        ResultScreen(results!!) {
-            results = null
-        }
-    }
-}
+    var userName by remember { mutableStateOf("") }
+    var recommendations by remember { mutableStateOf(emptyList<com.tiyasinsania0090.beautyglam.model.MakeupStyle>()) }
 
-@Preview(showBackground = true)
-@Preview(uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    BeautyGlamTheme {
-        MainScreen()
+    NavHost(navController, startDestination = "input") {
+        composable("input") {
+            InputScreen(
+                onSubmit = { name, skinType, skinTone, undertone, visualType ->
+                    userName = name
+                    recommendations = getRecommendedMakeup(skinType, skinTone, undertone, visualType)
+                    navController.navigate("result")
+                },
+                onNavigateAbout = {
+                    navController.navigate("about")
+                }
+            )
+        }
+        composable("result") {
+            ResultScreen(
+                name = userName,
+                recommendations = recommendations,
+                onBack = { navController.popBackStack() }
+            )
+        }
+        composable("about") {
+            AboutScreen()
+        }
     }
 }
