@@ -18,13 +18,10 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun SplashScreen(navController: NavController) {
 
-    var showLogo by remember { mutableStateOf(true) }
     var dotCount by remember { mutableIntStateOf(1) }
 
     LaunchedEffect(Unit) {
-        delay(2000L) // Delay before showing loading animation
-        showLogo = false
-
+        delay(2000L)
         repeat(6) {
             delay(500)
             dotCount = (dotCount % 3) + 1
@@ -42,15 +39,6 @@ fun SplashScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (showLogo) {
-            Image(
-                painter = painterResource(id = R.drawable.logobeautyglam),
-                contentDescription = "Logo App",
-                modifier = Modifier
-                    .height(270.dp)
-                    .width(270.dp)
-            )
-        } else {
             Image(
                 painter = painterResource(id = R.drawable.loadingbunny),
                 contentDescription = "Loading Bunny",
@@ -64,7 +52,7 @@ fun SplashScreen(navController: NavController) {
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFFEA79A3)
+//                color = MaterialTheme.colorScheme.primary
             )
         }
     }
-}
