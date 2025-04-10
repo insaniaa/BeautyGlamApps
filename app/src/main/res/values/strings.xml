@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">BeautyGlam ⋆. 𐙚 ˚</string>
+    <string name="app_name" translatable="false">BeautyGlam</string>
     <string name="welcome_message">Welcome to BeautyGlam!</string>
     <string name="find_makeup">Find Your Makeup!</string>
     <string name="name_label">Name</string>
@@ -30,12 +30,12 @@
 
     <string name="loading">Loading</string>
 
-    <string name="about_application">About Application</string>
+    <string name="about_application">About Application ⋆. 𐙚 ˚</string>
     <string name="about_description">BeautyGlam is a makeup recommendation app designed to help users discover makeup styles that best suit their skin type, skin tone, undertone, visual type, and Makeup uses. By using BeautyGlam, users receive personalized makeup suggestions complete with detailed explanations and visual references, making it easier to choose their desired look.</string>
     <string name="about_description2">Before receiving recommendations, users can also try bold or natural makeup filters to find out whether their visual type leans more towards high visual or low visual.</string>
     <string name="signature">Sincerely, Tiyas Insania D.</string>
 
-    <string name="recommendation">Recomendation</string>
+    <string name="recommendation">Recomendation⋆. 𐙚 ˚</string>
     <string name="hi_user">Hi</string>
     <string name="no_styles_found">Oops, no styles found 🥺</string>
     <string name="styles_found">Here are some makeup styles you can try!</string>

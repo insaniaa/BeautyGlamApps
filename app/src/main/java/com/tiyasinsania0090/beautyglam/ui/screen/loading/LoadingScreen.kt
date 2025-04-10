@@ -40,20 +40,21 @@ fun SplashScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-            Image(
+        Image(
                 painter = painterResource(id = R.drawable.loadingbunny),
                 contentDescription = "Loading Bunny",
                 modifier = Modifier
                     .height(120.dp)
                     .width(120.dp)
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = "${stringResource(R.string.loading)}${".".repeat(dotCount)}",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color(0xFFEA79A3)
-                // color = MaterialTheme.colorScheme.primary
         )
-        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+            text = "${stringResource(R.string.loading)}${".".repeat(dotCount)}",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            color = Color(0xFFD63384)
+        )
     }
+}

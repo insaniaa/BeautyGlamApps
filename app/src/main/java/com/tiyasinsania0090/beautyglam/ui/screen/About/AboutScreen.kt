@@ -22,8 +22,8 @@ fun AboutScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("About Application ⋆. \uD801\uDE5A ˚") },
-                navigationIcon = {
+                title = { Text(text = stringResource(R.string.about_application)) },
+                        navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -86,10 +86,12 @@ fun AboutScreen(
                 Text(
                     text = stringResource(R.string.signature),
                     fontSize = 18.sp,
-                    color = Color.Black,
+                    color = Color.Gray,
                     lineHeight = 22.sp
                 )
             }
         }
     }
 }
+
+

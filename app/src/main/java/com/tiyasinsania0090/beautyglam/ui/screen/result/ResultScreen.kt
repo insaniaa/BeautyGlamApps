@@ -55,7 +55,11 @@ fun ResultScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Result ⋆. \uD801\uDE5A ˚") },
+                title = {
+                    Text(
+                        text = stringResource(R.string.recommendation)
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -97,7 +101,7 @@ fun ResultScreen(
                     stringResource(R.string.no_styles_found)
                 },
                 fontSize = 14.sp,
-                color = Color.DarkGray,
+                color = Color.Gray,
                 modifier = Modifier.padding(top = 4.dp, bottom = 24.dp)
             )
 
@@ -111,7 +115,7 @@ fun ResultScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 10.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFFCE4EC)),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFEFB8C8)),
                     shape = RoundedCornerShape(16.dp),
                     elevation = CardDefaults.cardElevation(6.dp)
                 ) {

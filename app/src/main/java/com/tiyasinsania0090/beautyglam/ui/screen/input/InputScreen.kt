@@ -25,11 +25,31 @@ fun InputScreen(
     onNavigateAbout: () -> Unit
 ) {
     LocalContext.current
-    val skinTypes = listOf("Oily", "Combination", "Dry", "Normal")
-    val skinTones = listOf("Fair", "Medium", "Dark")
-    val undertones = listOf("Cool", "Neutral", "Warm")
-    val visualTypes = listOf("Low", "High")
-    val makeupUses = listOf("Daily", "Formal", "Special Events")
+    val skinTypes = listOf(
+        stringResource(R.string.oily),
+        stringResource(R.string.combination),
+        stringResource(R.string.dry),
+        stringResource(R.string.normal)
+    )
+    val skinTones = listOf(
+        stringResource(R.string.fair),
+        stringResource(R.string.medium),
+        stringResource(R.string.dark)
+    )
+    val undertones = listOf(
+        stringResource(R.string.cool),
+        stringResource(R.string.neutral),
+        stringResource(R.string.warm)
+    )
+    val visualTypes = listOf(
+        stringResource(R.string.low),
+        stringResource(R.string.high)
+    )
+    val makeupUses = listOf(
+        stringResource(R.string.daily),
+        stringResource(R.string.formal),
+        stringResource(R.string.special_events)
+    )
 
     var name by rememberSaveable { mutableStateOf("") }
     var nameError by rememberSaveable { mutableStateOf(false) }
@@ -54,12 +74,21 @@ fun InputScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("BeautyGlam") },
+                title = {  Text(stringResource(R.string.app_name) + " ⋆. \uD801\uDE5A ˚") },
                 actions = {
                     IconButton(onClick = onNavigateAbout) {
-                        Icon(Icons.Default.Info, contentDescription = "About")
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = "About",
+                            tint = Color.Black
+                        )
                     }
-                }
+
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFFFFC1D9),
+                    titleContentColor = Color.Black
+                )
             )
         }
     ) { padding ->
@@ -71,9 +100,8 @@ fun InputScreen(
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Find Your Makeup!", style = MaterialTheme.typography.titleMedium, color = Color(0xFFE91E63))
+            Text(stringResource(R.string.find_makeup), style = MaterialTheme.typography.titleMedium, color = Color(0xFFD63384))
 
-            // 🐰 Bunny Image
             Image(
                 painter = painterResource(id = R.drawable.loadingbunny),
                 contentDescription = "Loading Bunny",
@@ -83,16 +111,16 @@ fun InputScreen(
             )
 
             BeautyTextField(
-                label = "Name",
+                label = stringResource(R.string.name_label),
                 error = nameError,
                 value = name,
                 onValueChange = { name = it }
             )
-            SimpleDropdownSelector("Skin Type", error = skinTypeError, skinTypes, skinType) { skinType = it }
-            SimpleDropdownSelector("Skin Tone", error = skinToneError, skinTones, skinTone) { skinTone = it }
-            SimpleDropdownSelector("Under Tone", error = undertoneError, undertones, undertone) { undertone = it }
-            SimpleDropdownSelector("Visual Type", error = visualTypeError, visualTypes, visualType) { visualType = it }
-            SimpleDropdownSelector("Makeup Uses", error = makeupUseError, makeupUses, makeupUse) { makeupUse = it }
+            SimpleDropdownSelector(stringResource(R.string.skin_type_label), error = skinTypeError, skinTypes, skinType) { skinType = it }
+            SimpleDropdownSelector(stringResource(R.string.skin_tone_label), error = skinToneError, skinTones, skinTone) { skinTone = it }
+            SimpleDropdownSelector(stringResource(R.string.undertone_label), error = undertoneError, undertones, undertone) { undertone = it }
+            SimpleDropdownSelector(stringResource(R.string.visual_type_label), error = visualTypeError, visualTypes, visualType) { visualType = it }
+            SimpleDropdownSelector(stringResource(R.string.makeup_uses_label), error = makeupUseError, makeupUses, makeupUse) { makeupUse = it }
 
             Spacer(modifier = Modifier.height(4.dp))
 
@@ -116,7 +144,7 @@ fun InputScreen(
                     .height(50.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE91E63))
             ) {
-                Text("Check Your Recommendation")
+                Text(stringResource(R.string.check_recommendation))
             }
         }
     }
@@ -187,3 +215,4 @@ fun ErrorHint(isError: Boolean) {
         Text(text = stringResource(R.string.input_invalid))
     }
 }
+

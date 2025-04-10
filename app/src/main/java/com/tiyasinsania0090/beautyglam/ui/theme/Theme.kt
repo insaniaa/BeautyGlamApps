@@ -1,6 +1,5 @@
 package com.tiyasinsania0090.beautyglam.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -12,15 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = pink10,
+    secondary = pink20,
+    tertiary = Pink30
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = pink10,
+    secondary = pink20,
+    tertiary = Pink30
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -36,7 +35,6 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun BeautyGlamTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
