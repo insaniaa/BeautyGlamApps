@@ -20,7 +20,6 @@ fun AppNavigation() {
         composable("loading") {
             SplashScreen(navController = navController)
         }
-
         composable("input") {
             InputScreen(
                 onSubmit = { name, skinType, skinTone, undertone, visualType, makeupUses ->
