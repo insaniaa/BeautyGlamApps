@@ -1,6 +1,5 @@
 package com.tiyasinsania0090.beautyglam.ui.screen.input
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.*
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.res.stringResource
 import com.tiyasinsania0090.beautyglam.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,7 +24,7 @@ fun InputScreen(
     onSubmit: (String, String, String, String, String, String) -> Unit,
     onNavigateAbout: () -> Unit
 ) {
-    val context = LocalContext.current
+    LocalContext.current
     val skinTypes = listOf("Oily", "Combination", "Dry", "Normal")
     val skinTones = listOf("Fair", "Medium", "Dark")
     val undertones = listOf("Cool", "Neutral", "Warm")
@@ -32,11 +32,22 @@ fun InputScreen(
     val makeupUses = listOf("Daily", "Formal", "Special Events")
 
     var name by rememberSaveable { mutableStateOf("") }
+    var nameError by rememberSaveable { mutableStateOf(false) }
+
     var skinType by rememberSaveable { mutableStateOf("") }
+    var skinTypeError by rememberSaveable { mutableStateOf(false) }
+
     var skinTone by rememberSaveable { mutableStateOf("") }
+    var skinToneError by rememberSaveable { mutableStateOf(false) }
+
     var undertone by rememberSaveable { mutableStateOf("") }
+    var undertoneError by rememberSaveable { mutableStateOf(false) }
+
     var visualType by rememberSaveable { mutableStateOf("") }
+    var visualTypeError by rememberSaveable { mutableStateOf(false) }
+
     var makeupUse by rememberSaveable { mutableStateOf("") }
+    var makeupUseError by rememberSaveable { mutableStateOf(false) }
 
     val scrollState = rememberScrollState()
 
@@ -71,22 +82,33 @@ fun InputScreen(
                     .padding(vertical = 16.dp)
             )
 
-            BeautyTextField("Name", name) { name = it }
-            SimpleDropdownSelector("Skin Type", skinTypes, skinType) { skinType = it }
-            SimpleDropdownSelector("Skin Tone", skinTones, skinTone) { skinTone = it }
-            SimpleDropdownSelector("Under Tone", undertones, undertone) { undertone = it }
-            SimpleDropdownSelector("Visual Type", visualTypes, visualType) { visualType = it }
-            SimpleDropdownSelector("Makeup Uses", makeupUses, makeupUse) { makeupUse = it }
+            BeautyTextField(
+                label = "Name",
+                error = nameError,
+                value = name,
+                onValueChange = { name = it }
+            )
+            SimpleDropdownSelector("Skin Type", error = skinTypeError, skinTypes, skinType) { skinType = it }
+            SimpleDropdownSelector("Skin Tone", error = skinToneError, skinTones, skinTone) { skinTone = it }
+            SimpleDropdownSelector("Under Tone", error = undertoneError, undertones, undertone) { undertone = it }
+            SimpleDropdownSelector("Visual Type", error = visualTypeError, visualTypes, visualType) { visualType = it }
+            SimpleDropdownSelector("Makeup Uses", error = makeupUseError, makeupUses, makeupUse) { makeupUse = it }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
             Button(
                 onClick = {
-                    if (name.isNotBlank() && skinType.isNotBlank() && skinTone.isNotBlank() &&
+                    nameError = (name == "" || name == "0" )
+                    skinTypeError = (skinType == "" || skinType == "0" )
+                    skinToneError = (skinTone == "" || skinTone == "0" )
+                    undertoneError = (undertone == "" || undertone == "0" )
+                    visualTypeError = (visualType == "" || visualType == "0" )
+                    makeupUseError = (makeupUse == "" || makeupUse == "0" )
+                    if (nameError || skinTypeError || skinToneError || undertoneError || visualTypeError || makeupUseError) {
+                        return@Button
+                    } else if (name.isNotBlank() && skinType.isNotBlank() && skinTone.isNotBlank() &&
                         undertone.isNotBlank() && visualType.isNotBlank() && makeupUse.isNotBlank()) {
                         onSubmit(name, skinType, skinTone, undertone, visualType, makeupUse)
-                    } else {
-                        Toast.makeText(context, "Please fill all fields 💖", Toast.LENGTH_SHORT).show()
                     }
                 },
                 modifier = Modifier
@@ -101,11 +123,13 @@ fun InputScreen(
 }
 
 @Composable
-fun BeautyTextField(label: String, value: String, onValueChange: (String) -> Unit) {
+fun BeautyTextField(label: String, error: Boolean, value: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(label) },
+        supportingText = { ErrorHint(isError = error) },
+        isError = error,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
@@ -115,6 +139,7 @@ fun BeautyTextField(label: String, value: String, onValueChange: (String) -> Uni
 @Composable
 fun SimpleDropdownSelector(
     label: String,
+    error: Boolean,
     options: List<String>,
     selectedOption: String,
     onOptionSelected: (String) -> Unit
@@ -127,6 +152,8 @@ fun SimpleDropdownSelector(
             onValueChange = {},
             readOnly = true,
             label = { Text(label) },
+            supportingText = { ErrorHint(isError = error) },
+            isError = error,
             trailingIcon = {
                 IconButton(onClick = { expanded = !expanded }) {
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown Icon")
@@ -151,5 +178,12 @@ fun SimpleDropdownSelector(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun ErrorHint(isError: Boolean) {
+    if (isError) {
+        Text(text = stringResource(R.string.input_invalid))
     }
 }
