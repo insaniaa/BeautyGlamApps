@@ -1,22 +1,42 @@
 <resources>
-    <string name="app_name">GlitterMatch</string>
-    <string name="welcome_message">Welcome to GlitterMatch!</string>
+    <string name="app_name" translatable="false">BeautyGlam ⋆. 𐙚 ˚</string>
+    <string name="welcome_message">Welcome to BeautyGlam!</string>
+    <string name="find_makeup">Find Your Makeup!</string>
+    <string name="name_label">Name</string>
+    <string name="skin_type_label">Skin Type</string>
+    <string name="skin_tone_label">Skin Tone</string>
+    <string name="undertone_label">Under Tone</string>
+    <string name="visual_type_label">Visual Type</string>
+    <string name="makeup_uses_label">Makeup Uses</string>
+    <string name="check_recommendation">Check Your Recommendation</string>
+
+    <!-- Dropdown Options -->
+    <string name="oily">Oily</string>
+    <string name="combination">Combination</string>
+    <string name="dry">Dry</string>
+    <string name="normal">Normal</string>
+    <string name="fair">Fair</string>
+    <string name="medium">Medium</string>
+    <string name="dark">Dark</string>
+    <string name="cool">Cool</string>
+    <string name="neutral">Neutral</string>
+    <string name="warm">Warm</string>
+    <string name="low">Low</string>
+    <string name="high">High</string>
+    <string name="daily">Daily</string>
+    <string name="formal" translatable="false">Formal</string>
+    <string name="special_events">Special Events</string>
     <string name="input_invalid">The input must not be empty</string>
 
-    <string name="about_apps"><![CDATA[
-GlitterMatch is a makeup recommendation app designed to help users discover makeup styles that best suit their skin type, skin tone, undertone, and visual type. By using GlitterMatch, users receive personalized makeup suggestions complete with detailed explanations and visual references, making it easier to choose their desired look.
+    <string name="loading">Loading</string>
 
-Before receiving recommendations, users can also try bold or natural makeup filters to find out whether their visual type leans more towards high visual or low visual.
+    <string name="about_application">About Application</string>
+    <string name="about_description">BeautyGlam is a makeup recommendation app designed to help users discover makeup styles that best suit their skin type, skin tone, undertone, visual type, and Makeup uses. By using BeautyGlam, users receive personalized makeup suggestions complete with detailed explanations and visual references, making it easier to choose their desired look.</string>
+    <string name="about_description2">Before receiving recommendations, users can also try bold or natural makeup filters to find out whether their visual type leans more towards high visual or low visual.</string>
+    <string name="signature">Sincerely, Tiyas Insania D.</string>
 
-🛠️ Main Features:
-✔ Personalized Makeup: Recommendations based on the user’s facial characteristics.
-✔ Detailed Explanation: Each suggestion includes complete information about the makeup techniques and products used.
-✔ Visual Inspiration: Reference images are available to help users better understand the recommended look.
-✔ Easy Interaction: Inputs are designed with user-friendly options for a smoother experience.
-
-📌 Mobile Application Programming Mini Project:
-This app was developed as a first-semester mini project in the Mobile Application Programming course. The goal of this project is to implement Jetpack Compose in Android UI development, as well as to understand data handling and dynamic recommendation displays.
-
-With GlitterMatch, we hope users can explore makeup styles that truly match their unique features! ✨💄
-    ]]></string>
+    <string name="recommendation">Recomendation</string>
+    <string name="hi_user">Hi</string>
+    <string name="no_styles_found">Oops, no styles found 🥺</string>
+    <string name="styles_found">Here are some makeup styles you can try!</string>
 </resources>
