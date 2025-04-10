@@ -1,29 +1,30 @@
 package com.tiyasinsania0090.beautyglam.ui.screen.about
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.tiyasinsania0090.beautyglam.R
 
 @Composable
-fun AboutScreen(navController: NavController) {
+fun AboutScreen(
+    onBack: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp)
     ) {
-        // Back Button
-        IconButton(onClick = { navController.navigate("input") }) {
+        // Tombol Back
+        IconButton(onClick = { onBack() }) { // Memanggil onBack ketika tombol di-klik
             Icon(
-                imageVector = androidx.compose.material.icons.Icons.Default.ArrowBack,
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "Back",
                 tint = Color.Black
             )
