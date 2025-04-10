@@ -14,6 +14,7 @@ import kotlinx.coroutines.delay
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun SplashScreen(navController: NavController) {
@@ -48,11 +49,11 @@ fun SplashScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = "loading ${".".repeat(dotCount)}",
+                text = "${stringResource(R.string.loading)}${".".repeat(dotCount)}",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFFEA79A3)
-//                color = MaterialTheme.colorScheme.primary
-            )
+                // color = MaterialTheme.colorScheme.primary
+        )
         }
     }
